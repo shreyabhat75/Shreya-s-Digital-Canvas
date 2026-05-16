@@ -2,8 +2,6 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -55,7 +53,7 @@
   --popover: oklch(0.16 0.025 275);
   --popover-foreground: oklch(0.97 0.01 280);
 
-  --primary: oklch(0.7 0.21 295);          /* violet */
+  --primary: oklch(0.7 0.21 295); /* violet */
   --primary-foreground: oklch(0.99 0 0);
 
   --secondary: oklch(0.22 0.04 275);
@@ -64,7 +62,7 @@
   --muted: oklch(0.2 0.03 275);
   --muted-foreground: oklch(0.7 0.03 280);
 
-  --accent: oklch(0.65 0.2 250);            /* azure */
+  --accent: oklch(0.65 0.2 250); /* azure */
   --accent-foreground: oklch(0.99 0 0);
 
   --destructive: oklch(0.62 0.24 27);
@@ -79,10 +77,16 @@
   --rose: oklch(0.78 0.13 350);
   --glow: oklch(0.75 0.22 295 / 0.55);
 
-  --gradient-hero: radial-gradient(ellipse at 20% 10%, oklch(0.4 0.18 290 / 0.45), transparent 55%),
-                   radial-gradient(ellipse at 80% 30%, oklch(0.45 0.2 240 / 0.35), transparent 55%),
-                   radial-gradient(ellipse at 50% 90%, oklch(0.4 0.18 320 / 0.3), transparent 60%);
-  --gradient-text: linear-gradient(135deg, oklch(0.95 0.02 280), oklch(0.78 0.18 295), oklch(0.78 0.18 240));
+  --gradient-hero:
+    radial-gradient(ellipse at 20% 10%, oklch(0.4 0.18 290 / 0.45), transparent 55%),
+    radial-gradient(ellipse at 80% 30%, oklch(0.45 0.2 240 / 0.35), transparent 55%),
+    radial-gradient(ellipse at 50% 90%, oklch(0.4 0.18 320 / 0.3), transparent 60%);
+  --gradient-text: linear-gradient(
+    135deg,
+    oklch(0.95 0.02 280),
+    oklch(0.78 0.18 295),
+    oklch(0.78 0.18 240)
+  );
   --gradient-border: linear-gradient(135deg, oklch(0.7 0.21 295 / 0.6), oklch(0.65 0.18 240 / 0.6));
 
   --shadow-glow: 0 0 60px -10px oklch(0.7 0.21 295 / 0.45);
@@ -90,6 +94,11 @@
 }
 
 @layer base {
+  html {
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+  }
+
   * {
     border-color: var(--color-border);
   }
@@ -124,6 +133,24 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-float-blob,
+  .animate-grid-pan,
+  .animate-pulse-glow,
+  .animate-shine {
+    animation: none !important;
+  }
+}
+
 @layer components {
   .text-gradient {
     background: var(--gradient-text);
@@ -133,11 +160,7 @@
   }
 
   .glass {
-    background: linear-gradient(
-      135deg,
-      oklch(0.97 0.01 280 / 0.06),
-      oklch(0.97 0.01 280 / 0.02)
-    );
+    background: linear-gradient(135deg, oklch(0.97 0.01 280 / 0.06), oklch(0.97 0.01 280 / 0.02));
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
     border: 1px solid oklch(0.97 0.01 280 / 0.08);
@@ -160,7 +183,9 @@
     padding: 1px;
     border-radius: inherit;
     background: var(--gradient-border);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
@@ -195,36 +220,57 @@
 }
 
 @keyframes float-blob {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(40px, -30px) scale(1.08); }
-  66% { transform: translate(-30px, 25px) scale(0.95); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(40px, -30px) scale(1.08);
+  }
+  66% {
+    transform: translate(-30px, 25px) scale(0.95);
+  }
 }
 
 @keyframes shine {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes grid-pan {
-  0% { background-position: 0 0; }
-  100% { background-position: 60px 60px; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 60px 60px;
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 0 0 oklch(0.7 0.21 295 / 0.5); }
-  50% { box-shadow: 0 0 40px 10px oklch(0.7 0.21 295 / 0.15); }
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 oklch(0.7 0.21 295 / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px 10px oklch(0.7 0.21 295 / 0.15);
+  }
 }
 
-.animate-float-blob { animation: float-blob 14s ease-in-out infinite; }
-.animate-grid-pan { animation: grid-pan 20s linear infinite; }
-.animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.animate-float-blob {
+  animation: float-blob 14s ease-in-out infinite;
+}
+.animate-grid-pan {
+  animation: grid-pan 20s linear infinite;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
 .animate-shine {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    oklch(0.97 0.01 280 / 0.15),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, oklch(0.97 0.01 280 / 0.15), transparent);
   background-size: 200% 100%;
   animation: shine 2.5s linear infinite;
 }
