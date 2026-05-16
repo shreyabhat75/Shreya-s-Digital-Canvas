@@ -7,7 +7,7 @@ const resumeFile = new URL("../../Shreya_Mohan_Bhat.pdf", import.meta.url).href;
 const badges = [
   { label: "React", x: "8%", y: "20%", d: 0 },
   { label: "AI / ML", x: "82%", y: "18%", d: 0.3 },
-  { label: "Next.js", x: "12%", y: "72%", d: 0.6 },
+  { label: "React.js", x: "12%", y: "72%", d: 0.6 },
   { label: "Figma", x: "85%", y: "70%", d: 0.9 },
   { label: "Python", x: "50%", y: "8%", d: 0.45 },
 ];
@@ -120,7 +120,7 @@ export function Hero() {
             {[
               { Icon: Github, href: "https://github.com" },
               { Icon: Linkedin, href: "https://linkedin.com" },
-              { Icon: Mail, href: "mailto:hello@shreya.dev" },
+              { Icon: Mail, href: "mailto:shreyab232@gmail.com" },
             ].map(({ Icon, href }, i) => (
               <a
                 key={i}

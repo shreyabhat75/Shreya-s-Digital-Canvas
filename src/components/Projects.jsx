@@ -31,7 +31,7 @@ const projects = [
   {
     title: "Sign Language Translator",
     desc: "ML-powered translator that recognises sign language gestures in real time to bridge communication gaps.",
-    stack: ["Python", "OpenCV", "TensorFlow"],
+    stack: ["Python", "OpenCV", "TensorFlow","LSTM"],
     hue: "from-azure/30 to-rose/30",
   },
   {
